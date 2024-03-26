@@ -16,28 +16,39 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tmapViewRelativeLayout:RelativeLayout
     // 지도의 객체
     private lateinit var tMapView:TMapView
+    private lateinit var tmapData:TMapData
 
-    fun makeDelay() {
+    fun setAppKey() {
         // 앱 키 설정
         tMapView.setSKTMapApiKey("GaysikTxiU3X0maxNBKNu6pi4yfFqgfy7x0HNqUv")
 
+        // 코루틴을 이용한 딜레이 적용
         CoroutineScope(Dispatchers.Main).launch {
             waitForAppKeyAuthentication()
-            // 인증이 완료되면 경로를 그리는 작업 실행
-            var tmapData = TMapData()
+            setMap()
+            drawMarker()
+        }
+    }
 
-            tmapData.findAllPOI("한성대", 2){
-                    poiItem ->
-                for(i in 0..<poiItem.size) {
-                    var item = poiItem.get(i)
-                    Log.d("poi tag",
-                        "POI Name: " + item.getPOIName().toString() + ", " +
-                                "Address: " + item.getPOIAddress().replace("null", "") + ", " +
-                                "Point: " + item.getPOIPoint().toString()
-                    );
-                }
-                tMapView.addTMapPOIItem(poiItem);
+    fun setMap() {
+        // 처음 줌 크기
+        tMapView.zoomLevel = 15;
+        // 지도의 초기 위치를 지정하는 함수
+        tMapView.setCenterPoint(37.570028, 126.986072)
+    }
+
+    fun drawMarker() {
+        tmapData.findAllPOI("경복궁", 5){
+                poiItem ->
+            for(i in 0..<poiItem.size) {
+                var item = poiItem.get(i)
+                Log.d("poi tag",
+                    "POI Name: " + item.getPOIName().toString() + ", " +
+                            "Address: " + item.getPOIAddress().replace("null", "") + ", " +
+                            "Point: " + item.getPOIPoint().toString()
+                );
             }
+            tMapView.addTMapPOIItem(poiItem);
         }
     }
 
@@ -52,16 +63,12 @@ class MainActivity : AppCompatActivity() {
         // xml에 RelativeLayout으로 구성되어 있다.
         tmapViewRelativeLayout = findViewById(R.id.tmapViewContainer)
         tMapView = TMapView(this)
+        tmapData = TMapData()
 
         // 뷰 설정
         tmapViewRelativeLayout.addView(tMapView)
 
-        makeDelay()
-
-        // 처음 줌 크기
-        //tMapView.zoomLevel = 15;
-        // 지도의 초기 위치를 지정하는 함수
-        //tMapView.setCenterPoint(37.570028, 126.986072)
+        setAppKey()
 
     }
 }
