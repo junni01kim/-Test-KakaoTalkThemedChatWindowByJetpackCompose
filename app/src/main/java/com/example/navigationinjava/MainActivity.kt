@@ -32,9 +32,12 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             delayTime()
             drawMarker()
+            delayTime()
             setMap()
             delayTime()
             drawRoute()
+            Log.d("poi print", "출력완료")
+            tMapView.setCenterPoint(hansungUniversity.latitude, hansungUniversity.longitude)
         }
     }
 
@@ -46,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 poiItem ->
             val poi = poiItem.get(0).poiPoint
             hansungUniversity = poi
-            //tMapView.setCenterPoint(poi.latitude, poi.longitude)
         }
     }
 
@@ -62,28 +64,13 @@ class MainActivity : AppCompatActivity() {
 
             tMapView.addTMapPolyLine(it)
             val info = tMapView.getDisplayTMapInfo(it.getLinePointList())
-            tMapView.setCenterPoint(info.point.latitude, info.point.longitude)
+            //tMapView.setCenterPoint(info.point.latitude, info.point.longitude)
         }
     }
 
     fun drawMarker() {
         // 1개의 값만 찾고 싶은 경우(가장 정확한 값만 찾는 기능은 모르겠음)
-        tmapData.findAllPOI("한성대입구역", 1){
-                poiItem ->
-            for(i in 0..<poiItem.size) {
-                var item = poiItem.get(i)
-                Log.d("poi tag",
-                    "POI Name: " + item.poiName.toString() + ", " +
-                            "Address: " + item.poiAddress.replace("null", "") + ", " +
-                            "Point: " + item.poiPoint.toString()
-                );
-
-                tMapView.addTMapPOIItem(poiItem)
-                hansungUniversityStation = poiItem[0].poiPoint
-            }
-            tMapView.addTMapPOIItem(poiItem);
-        }
-        /*// 한성대 입구역을 키워드로 여러개 장소를 찾는 키워드
+        // 한성대 입구역을 키워드로 여러개 장소를 찾는 키워드
         tmapData.findTitlePOI("한성대입구역") {
             for (item in it) {
                 Log.d(
@@ -95,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
             tMapView.addTMapPOIItem(it)
             hansungUniversityStation = it[0].poiPoint
-        }*/
+        }
     }
 
     suspend fun delayTime() {
