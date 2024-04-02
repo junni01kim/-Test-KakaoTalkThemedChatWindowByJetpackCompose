@@ -1,6 +1,7 @@
 # Pedestrian_Navigation_Practice1의 학습을 위한 프로젝트 파일입니다.
 
 ## 실행화면
+#### v1.0.0
 <img width="168" alt="image" src="https://github.com/junni01kim/Pedestrian_Navigation_Practice1/assets/127941871/17dbcc95-300d-45a4-a088-54e3ea3ce778">
 
 ## Tmap API를 이용한 도보 네비게이션 만들기
