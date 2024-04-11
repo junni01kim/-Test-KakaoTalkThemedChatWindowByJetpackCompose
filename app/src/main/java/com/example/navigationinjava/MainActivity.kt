@@ -81,6 +81,12 @@ class MainActivity : AppCompatActivity() {
             val client = OkHttpClient()
 
             val json = JSONObject()
+
+            departure?.longitude = 126.926493082645
+            departure?.latitude = 37.6134436427887
+            destination?.longitude = 127.126936754911
+            destination?.latitude = 37.5004198786564
+
             json.put("startX", departure?.longitude)
             json.put("startY", departure?.latitude)
             json.put("endY", destination?.longitude)
@@ -88,7 +94,6 @@ class MainActivity : AppCompatActivity() {
             json.put("lang", 0)
             json.put("format", "json")
             json.put("count", 10)
-
 
             val body = json.toString().toRequestBody(JSON)
 
@@ -99,7 +104,6 @@ class MainActivity : AppCompatActivity() {
                 .addHeader("content-type", "application/json")
                 .addHeader("appKey", "e8wHh2tya84M88aReEpXCa5XTQf3xgo01aZG39k5")
                 .build()
-
 
             // 네트워크 통신의 시간이 있기 때문에 스레드를 이용하여 정보를 얻는다.
             var json_string:String? = null
@@ -122,12 +126,12 @@ class MainActivity : AppCompatActivity() {
             Log.d("log", "drawRouteThread")
             // 네트워크 받는 동안 대기
             while (departure == null)
-                sleep(100)
-            while (destination == null)
-                sleep(100)
+                sleep(50)
+            while(destination == null)
+                sleep(50)
 
-            drawRoute()
-            //getTransMitJSON()
+            //drawRoute()
+            getTransMitJSON()
         }
     }
 
@@ -140,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             setAppKey()
             delay(800)
 
-            val drawRouteThread = DrawRouteThread(tMapView, tmapData, "경복궁","혜화")
+            val drawRouteThread = DrawRouteThread(tMapView, tmapData, "한성대학교","혜화")
             drawRouteThread.start()
         }
     }
