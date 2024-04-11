@@ -82,20 +82,19 @@ class MainActivity : AppCompatActivity() {
 
             val json = JSONObject()
 
-            departure?.longitude = 126.926493082645
-            departure?.latitude = 37.6134436427887
-            destination?.longitude = 127.126936754911
-            destination?.latitude = 37.5004198786564
-
             json.put("startX", departure?.longitude)
             json.put("startY", departure?.latitude)
             json.put("endY", destination?.longitude)
             json.put("endX", destination?.latitude)
-            json.put("lang", 0)
-            json.put("format", "json")
-            json.put("count", 10)
 
-            val body = json.toString().toRequestBody(JSON)
+            val body =
+                ("{\"startX\":\"${departure?.longitude}\"," +
+                        "\"startY\":\"${departure?.latitude}\"," +
+                        "\"endX\":\"${destination?.longitude}\"," +
+                        "\"endY\":\"${destination?.latitude}\"," +
+                        "\"format\":\"json\"," +
+                        "\"count\":10}")
+                    .toRequestBody(JSON)
 
             val request = Request.Builder()
                 .url(url)
@@ -144,7 +143,7 @@ class MainActivity : AppCompatActivity() {
             setAppKey()
             delay(800)
 
-            val drawRouteThread = DrawRouteThread(tMapView, tmapData, "한성대학교","혜화")
+            val drawRouteThread = DrawRouteThread(tMapView, tmapData, "경복궁","혜화")
             drawRouteThread.start()
         }
     }
