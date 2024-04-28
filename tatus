@@ -1,0 +1,84 @@
+[33mcommit 59b835d5e90d9e065fe6f9a8f6a75558af79a45a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Thu Apr 11 18:16:49 2024 +0900
+
+    complete getTransMitJson Bug
+
+[33mcommit 9b816a6824493eb50e9aa30add716dd97586fe75[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Thu Apr 11 17:51:38 2024 +0900
+
+    error check
+
+[33mcommit 5aaf0d688959bfd8e7cc9e9bd652a8a74e7f4ef5[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Thu Apr 11 16:54:37 2024 +0900
+
+    save
+
+[33mcommit e5530652baae4765ef93ca59539783a330e471e9[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Tue Apr 9 20:53:26 2024 +0900
+
+    optimization code
+
+[33mcommit 5bcf96afa2dbdc5118635e3e9426ee373a6f6f34[m
+Merge: 910d52a 1278a56
+Author: junni01kim <audwnssp@naver.com>
+Date:   Wed Apr 3 16:25:14 2024 +0900
+
+    Merge branch 'main' of https://github.com/junni01kim/-Test-KakaoTalkThemedChatWindowByJetpackCompose
+
+[33mcommit 910d52a01c2579638a56975d73441680ce843847[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Wed Apr 3 16:19:22 2024 +0900
+
+    update get json
+
+[33mcommit 1278a5631ddcca98bca39220e4f14582f24be995[m
+Author: Myeongjun Kim <127941871+junni01kim@users.noreply.github.com>
+Date:   Tue Apr 2 11:22:05 2024 +0900
+
+    Update README.md
+
+[33mcommit 22b3ae869bc3e4aa2c9e323e81f62bb1ca2dc3b1[m[33m ([m[1;33mtag: [m[1;33mv1.0.0[m[33m)[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Tue Apr 2 11:08:56 2024 +0900
+
+    end project
+
+[33mcommit 0d8832f2e691ed297fbf8d8ea5fc720ab32345b3[m
+Author: Myeongjun Kim <127941871+junni01kim@users.noreply.github.com>
+Date:   Tue Apr 2 11:08:17 2024 +0900
+
+    Update README.md
+
+[33mcommit c0071249041589dd0d556ef5abf7767724f4dbf4[m
+Author: Myeongjun Kim <127941871+junni01kim@users.noreply.github.com>
+Date:   Tue Apr 2 10:45:41 2024 +0900
+
+    Update README.md
+
+[33mcommit c67642a1cc73a0ae0b9091acb00d55052d96b993[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Wed Mar 27 02:19:21 2024 +0900
+
+    update drawRoute():it is function that draw line about specific Route(hansung university, hansung university station)
+
+[33mcommit e5a093e7e048480a4ef735721146b8cade32d818[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Tue Mar 26 20:43:59 2024 +0900
+
+    update setMap()&drawMarker():function segmentation
+
+[33mcommit 6f316b897e87e4f0f0892f3d837f444393eacd3f[m
+Author: Myeongjun Kim <127941871+junni01kim@users.noreply.github.com>
+Date:   Tue Mar 26 20:23:29 2024 +0900
+
+    Create README.md
+
+[33mcommit 3aaa244c4b0c7f6058592cbea72d0e4ac5fb3d56[m
+Author: junni01kim <audwnssp@naver.com>
+Date:   Tue Mar 26 20:21:46 2024 +0900
+
+    first Commit

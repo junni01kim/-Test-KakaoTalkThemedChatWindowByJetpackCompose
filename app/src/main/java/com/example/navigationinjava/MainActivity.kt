@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.InstanceCreator
+import com.google.gson.JsonParser
 import com.skt.tmap.TMapData
 import com.skt.tmap.TMapPoint
 import com.skt.tmap.TMapView
+import com.test.sdktestkotlin.TransmitRoute
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -80,15 +85,9 @@ class MainActivity : AppCompatActivity() {
             val url = "https://apis.openapi.sk.com/transit/routes"
             val client = OkHttpClient()
 
-            val json = JSONObject()
-
-            json.put("startX", departure?.longitude)
-            json.put("startY", departure?.latitude)
-            json.put("endY", destination?.longitude)
-            json.put("endX", destination?.latitude)
-
             val body =
-                ("{\"startX\":\"${departure?.longitude}\"," +
+                (
+                        "{\"startX\":\"${departure?.longitude}\"," +
                         "\"startY\":\"${departure?.latitude}\"," +
                         "\"endX\":\"${destination?.longitude}\"," +
                         "\"endY\":\"${destination?.latitude}\"," +
@@ -104,21 +103,34 @@ class MainActivity : AppCompatActivity() {
                 .addHeader("appKey", "e8wHh2tya84M88aReEpXCa5XTQf3xgo01aZG39k5")
                 .build()
 
+            var result:String? = null
             // 네트워크 통신의 시간이 있기 때문에 스레드를 이용하여 정보를 얻는다.
-            var json_string:String? = null
             val response = client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     TODO("Not yet implemented")
                 }
                 // main thread말고 별도의 thread에서 실행해야 함.
                 override fun onResponse(call: Call, response: Response) {
-                    Thread{
-                        var str = response.body?.string()
-                        Log.d("print", str.toString())
-                        json_string = str?.trimIndent();
+                    Thread {
+                        result = response.body?.string()?.trimIndent()
+                        Log.d("printResult", result.toString())
                     }.start()
                 }
             })
+
+            /*if(result!=null) {
+                val jsonObject = JsonParser.parseString(result.toString())
+                val data:TransmitRoute = Gson().fromJson(jsonObject, TransmitRoute::class.java)
+                Log.d("printData", data.metaData?.requestParameters?.startY.toString())
+            }*/
+
+            if(result!=null) {
+                val jsonObject = JsonParser.parseString(result.toString())
+                val instanceCreator = InstanceCreator { type -> TransmitRoute() }
+                val gson = GsonBuilder().registerTypeAdapter(TransmitRoute::class.java, instanceCreator).create()
+                val transmitRoute = gson.fromJson(jsonObject, TransmitRoute::class.java)
+                Log.d("printData", transmitRoute.metaData?.requestParameters?.startY.toString())
+            }
         }
 
         override fun run() {
@@ -138,13 +150,11 @@ class MainActivity : AppCompatActivity() {
     fun runner() {
         Log.d("log", "run")
         // 앱 키 설정: 앱키 설정 후 딜레이 부여
-
         GlobalScope.launch {
             setAppKey()
             delay(800)
 
-            val drawRouteThread = DrawRouteThread(tMapView, tmapData, "경복궁","혜화")
-            drawRouteThread.start()
+            DrawRouteThread(tMapView, tmapData, "경복궁","혜화").start()
         }
     }
 }
