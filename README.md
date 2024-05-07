@@ -4,6 +4,10 @@
 #### v1.0.0
 <img width="168" alt="image" src="https://github.com/junni01kim/Pedestrian_Navigation_Practice1/assets/127941871/17dbcc95-300d-45a4-a088-54e3ea3ce778">
 
+#### v1.4
+<img width="1218" alt="image" src="https://github.com/junni01kim/Pedestrian_Navigation_Practice/assets/127941871/5bb85887-a25a-4ad0-9d6a-1ea0efe7c2f0">
+
+ 
 ## Tmap API를 이용한 도보 네비게이션 만들기
 
 ## 개요
@@ -45,3 +49,12 @@
  ## 미구현 요소
    - 기존의 코드가 너무 난잡하여 코드를 정리하였고, 기존의 수행 목표였던 파싱을 하지 못하였다.
        - 원인은 json과 클래스화에 대한 학습 미흡이므로 추가 학습을 할 예정이다.
+
+# 2024_04_27 (프로보노 4주차)
+## 구현 기능
+  1) 보행자 대중교통 경로 파싱: json string 값을 실제 객체로 만드는 방법을 학습.
+       - 객체화를 하기 위한 data class를 만드는 방식을 숙지하고 필요한 data class를 제작해보았다.
+  2) data class를 이용하여 클래스를 gson으로 파싱
+       - gson 파싱을 진행 반복적으로 Null값이 반환이 되었는데, 이유는 네트워크 전송시간 동안 프로그램이 미리 진행되는 상황이었기 때문.
+       - 플래스를 이용한 loop함수를 통해 문제 해결
+  \* 회의 결과 그림 그리기는 반복 작업이기에 실 프로젝트에서 진행하기로 계획
