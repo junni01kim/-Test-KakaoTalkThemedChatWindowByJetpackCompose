@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 대중교통을 포함한 경로 json을 얻기 위한 함수
-        fun getTransMitJSON(){
+        fun getTransMitJSON(): TransmitRoute{
             Log.d("log", "getTransMitJSON")
             val JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
             val url = "https://apis.openapi.sk.com/transit/routes"
@@ -124,13 +124,16 @@ class MainActivity : AppCompatActivity() {
                 Log.d("printData", data.metaData?.requestParameters?.startY.toString())
             }*/
 
-            if(result!=null) {
-                val jsonObject = JsonParser.parseString(result.toString())
-                val instanceCreator = InstanceCreator { type -> TransmitRoute() }
-                val gson = GsonBuilder().registerTypeAdapter(TransmitRoute::class.java, instanceCreator).create()
-                val transmitRoute = gson.fromJson(jsonObject, TransmitRoute::class.java)
-                Log.d("printData", transmitRoute.metaData?.requestParameters?.startY.toString())
+            while(result == null){
+                sleep(50)
             }
+
+            val jsonObject = JsonParser.parseString(result.toString())
+            val instanceCreator = InstanceCreator { type -> TransmitRoute() }
+            val gson = GsonBuilder().registerTypeAdapter(TransmitRoute::class.java, instanceCreator).create()
+            val transmitRoute = gson.fromJson(jsonObject, TransmitRoute::class.java)
+
+            return transmitRoute
         }
 
         override fun run() {
@@ -142,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 sleep(50)
 
             //drawRoute()
-            getTransMitJSON()
+            Log.d("printTransmit",getTransMitJSON().toString())
         }
     }
 
